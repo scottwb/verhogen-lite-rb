@@ -5,7 +5,7 @@
 #
 
 ruby_string="ruby-1.9.3-p0"
-gemset_name="verhogen"
+gemset_name="verhogen-rb"
 
 if rvm list strings | grep -q "${ruby_string}" ; then
 

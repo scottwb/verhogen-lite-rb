@@ -33,21 +33,21 @@ module Verhogen
       create_if_necessary
     end
 
-    def lock(timeout = 0)
+    def acquire(timeout = 0)
       return false if client.brpop(list_key, timeout).nil?
       @holding_lock = true
       if block_given?
         begin
           yield
         ensure
-          unlock
+          release
         end
       end
 
       true
     end
 
-    def unlock
+    def release
       if holding_lock?
         client.lpush(list_key, 1)
         @holding_lock = false

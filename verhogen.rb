@@ -48,10 +48,10 @@ module Verhogen
     end
 
     def release
-      if holding_lock?
-        client.lpush(list_key, 1)
-        @holding_lock = false
-      end
+      return false unless holding_lock?
+      client.lpush(list_key, 1)
+      @holding_lock = false
+      true
     end
 
 

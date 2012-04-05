@@ -54,6 +54,10 @@ module Verhogen
       true
     end
 
+    def holding_lock?
+      @holding_lock
+    end
+
 
     ############################################################
     # Private Instance Methods
@@ -72,10 +76,6 @@ module Verhogen
       if client.getset(exists_key, 1) != "1"
         client.lpush(list_key, 1)
       end
-    end
-
-    def holding_lock?
-      @holding_lock
     end
   end
 
